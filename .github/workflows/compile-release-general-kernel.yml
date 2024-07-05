@@ -18,10 +18,11 @@ on:
         options:
           - unifreq
           - codesnas
+          - dearxjoe
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "6.6.y"
+        default: "5.15.y_6.1.y"
         type: choice
         options:
           - 5.4.y
@@ -30,7 +31,7 @@ on:
           - 6.1.y
           - 6.6.y
           - 6.1.y_6.6.y
-          - 5.15.y_5.10.y
+          - 5.15.y_6.1.y
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
@@ -42,7 +43,7 @@ on:
         default: "all"
         type: choice
         options:
-          - all
+          - 全部
           - dtbs
       kernel_toolchain:
         description: "Select the compilation toolchain"
@@ -69,7 +70,7 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-ophub"
+        default: "-dearxjoe"
         type: choice
         options:
           - -ophub
@@ -82,7 +83,7 @@ on:
           - -summer-growing
           - -autumn-harvesting
           - -winter-storing
-          - -yourname
+          - -dearxjoe
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
@@ -151,12 +152,12 @@ jobs:
         run: |
           df -hT ${PWD}
           mkdir -p /builder/{kernel,output}
-          ln -sf /builder/kernel /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/kernel
-          ln -sf /builder/output /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/output
+          ln -sf /builder/kernel /home/runner/work/_actions/gsjsjg/amlogic-s9xxx-armbian/main/compile-kernel/kernel
+          ln -sf /builder/output /home/runner/work/_actions/gsjsjg/amlogic-s9xxx-armbian/main/compile-kernel/output
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Compile the kernel [ ${{ inputs.kernel_version }} ]
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: gsjsjg/amlogic-s9xxx-armbian@main
         if: ${{ steps.mapped.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: kernel
