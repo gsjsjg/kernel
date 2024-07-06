@@ -13,7 +13,8 @@ on:
       kernel_source:
         description: "Select the kernel source"
         required: false
-        default: "unifreq"
+        #default: "unifreq"
+        default: "gsjsjg"
         type: choice
         options:
           - unifreq
